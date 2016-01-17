@@ -1,6 +1,7 @@
 package com.udacity.firebase.shoppinglistplusplus.ui;
 
 import android.app.DialogFragment;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.udacity.firebase.shoppinglistplusplus.R;
+import com.udacity.firebase.shoppinglistplusplus.databinding.MainActivityBinding;
 import com.udacity.firebase.shoppinglistplusplus.ui.activeLists.AddListDialogFragment;
 import com.udacity.firebase.shoppinglistplusplus.ui.activeLists.ShoppingListsFragment;
 import com.udacity.firebase.shoppinglistplusplus.ui.meals.AddMealDialogFragment;
@@ -24,11 +26,12 @@ import com.udacity.firebase.shoppinglistplusplus.ui.meals.MealsFragment;
  */
 public class MainActivity extends BaseActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    private MainActivityBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.main_activity);
 
         /**
          * Link layout elements from XML and setup the toolbar
@@ -70,10 +73,10 @@ public class MainActivity extends BaseActivity {
      * Link layout elements from XML and setup the toolbar
      */
     public void initializeScreen() {
-        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
+        ViewPager viewPager = mBinding.pager;
+        TabLayout tabLayout = mBinding.tabLayout;
+        setSupportActionBar(mBinding.appBar);
+
         /**
          * Create SectionPagerAdapter, set it as adapter to viewPager with setOffscreenPageLimit(2)
          **/

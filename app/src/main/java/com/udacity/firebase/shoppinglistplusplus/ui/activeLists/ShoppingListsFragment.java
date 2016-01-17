@@ -1,6 +1,7 @@
 package com.udacity.firebase.shoppinglistplusplus.ui.activeLists;
 
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.udacity.firebase.shoppinglistplusplus.R;
+import com.udacity.firebase.shoppinglistplusplus.databinding.ShoppingListsFragmentBinding;
 
 
 /**
@@ -18,7 +20,7 @@ import com.udacity.firebase.shoppinglistplusplus.R;
  * create an instance of this fragment.
  */
 public class ShoppingListsFragment extends Fragment {
-    private ListView mListView;
+    private ShoppingListsFragmentBinding mBinding;
 
     public ShoppingListsFragment() {
         /* Required empty public constructor */
@@ -57,13 +59,10 @@ public class ShoppingListsFragment extends Fragment {
         /**
          * Initalize UI elements
          */
-        View rootView = inflater.inflate(R.layout.fragment_shopping_lists, container, false);
-        initializeScreen(rootView);
+        mBinding = DataBindingUtil.inflate(inflater,R.layout.shopping_lists_fragment,container, false);
+        View rootView = mBinding.getRoot();
 
-        /**
-         * Set interactive bits, such as click events and adapters
-         */
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mBinding.listViewActiveLists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -78,11 +77,4 @@ public class ShoppingListsFragment extends Fragment {
         super.onDestroy();
     }
 
-
-    /**
-     * Link layout elements from XML
-     */
-    private void initializeScreen(View rootView) {
-        mListView = (ListView) rootView.findViewById(R.id.list_view_active_lists);
-    }
 }
